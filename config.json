@@ -1,0 +1,6 @@
+{
+  "baseUrl": "https://otalio-hq-int.msccruises.com",
+  "authEndpoint": "/iam/v1/sso/login",
+  "articleSearchEndpoint": "/pos/v1/articles",
+  "articlePricesEndpoint": "/pos/v1/article-prices"
+}

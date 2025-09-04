@@ -1,0 +1,226 @@
+<% if (results && results.length) { %>
+<div class="table-responsive">
+  <table class="table align-middle table-hover">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>ArticleGroup Code</th>
+        <th>ArticleGroup Description</th>
+        <th>ArticleClass Code</th>
+        <th>ArticleClass Description</th>
+        <th>Enabled</th>
+        <th>Override</th>
+        <th>Prices</th>
+        <th>Actions</th>
+        <th>Fleet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% results.forEach(result => { %>
+      <tr>
+        <td><%= result.code %></td>
+        <td>
+          <%= result.description %>
+          <button class="badge-edit-description ms-2"
+            data-entity-id="<%= result.entityId %>"
+            data-description="<%- result.description.replace(/"/g, '&quot;') %>"
+            data-hierarchy="<%= hierarchyId %>"
+            title="Edit description">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+              <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1-.11-.168l10-10zM11.207 2.5 3 10.707V13h2.293L13.5 4.793 11.207 2.5zm1.586-1.586a1.5.5 0 0 0-2.121 0l-10 10A1.5 1.5 0 0 0 0 13.5V16h2.5a1.5 1.5 0 0 0 1.061-.439l10-10a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/>
+            </svg>
+          </button>
+        </td>
+        <td>
+          <%= result.groupCode %>
+          <button class="badge-edit-group ms-2"
+            data-entity-id="<%= result.entityId %>"
+            data-group-id="<%= result.groupId %>"
+            data-hierarchy="<%= hierarchyId %>"
+            title="Change ArticleGroup">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+              <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1-.11-.168l10-10zM11.207 2.5 3 10.707V13h2.293L13.5 4.793 11.207 2.5zm1.586-1.586a1.5.5 0 0 0-2.121 0l-10 10A1.5 1.5 0 0 0 0 13.5V16h2.5a1.5 1.5 0 0 0 1.061-.439l10-10a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/>
+            </svg>
+          </button>
+        </td>
+        <td>
+          <%= result.groupDesc %>
+        </td>
+        <td>
+          <% if (result.articleClasses && result.articleClasses.length) { %>
+            <% result.articleClasses.forEach(function(ac, i){ %>
+              <div style="margin-bottom:2px;display:flex;align-items:center;">
+                <span><%= (i + 1) + ') ' + ac.code %></span>
+                <button class="badge-edit-class ms-2"
+                  data-entity-id="<%= result.entityId %>"
+                  data-class-code="<%= ac.code %>"
+                  title="Edit ArticleClass Code (Enterprise only)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+                    <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1-.11-.168l10-10zM11.207 2.5 3 10.707V13h2.293L13.5 4.793 11.207 2.5zm1.586-1.586a1.5.5 0 0 0-2.121 0l-10 10A1.5 1.5 0 0 0 0 13.5V16h2.5a1.5 1.5 0 0 0 1.061-.439l10-10a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/>
+                  </svg>
+                </button>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <%= result.articleClassCode %>
+            <button class="badge-edit-class ms-2"
+              data-entity-id="<%= result.entityId %>"
+              data-class-code="<%= result.articleClassCode %>"
+              title="Edit ArticleClass Code (Enterprise only)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+                <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1-.11-.168l10-10zM11.207 2.5 3 10.707V13h2.293L13.5 4.793 11.207 2.5zm1.586-1.586a1.5.5 0 0 0-2.121 0l-10 10A1.5 1.5 0 0 0 0 13.5V16h2.5a1.5 1.5 0 0 0 1.061-.439l10-10a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/>
+              </svg>
+            </button>
+          <% } %>
+        </td>
+        <td>
+          <% if (result.articleClasses && result.articleClasses.length) { %>
+            <% result.articleClasses.forEach(function(ac){ %>
+              <div style="margin-bottom:2px;"><%= ac.description %></div>
+            <% }) %>
+          <% } else { %>
+            <%= result.articleClassDescription %>
+          <% } %>
+        </td>
+        <td>
+          <span class="enable-icon <%= result.isEnabled ? 'enable-yes' : 'enable-no' %>">
+            <%= result.isEnabled ? '✓' : '✗' %>
+          </span>
+          <button class="badge-edit-enable ms-1"
+            data-entity-id="<%= result.entityId %>"
+            data-enabled="<%= result.isEnabled ? 'true' : 'false' %>"
+            data-hierarchy="<%= hierarchyId %>"
+            title="Change Enabled/Disabled status">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+              <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1-.11-.168l10-10zM11.207 2.5 3 10.707V13h2.293L13.5 4.793 11.207 2.5zm1.586-1.586a1.5.5 0 0 0-2.121 0l-10 10A1.5 1.5 0 0 0 0 13.5V16h2.5a1.5 1.5 0 0 0 1.061-.439l10-10a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/>
+            </svg>
+          </button>
+        </td>
+        <td>
+          <% if (result.hierarchyId && result.hierarchyId != 1) { %>
+            <% if (!result.inherited) { %>
+              <button class="badge-delete-override ms-1"
+                data-entity-id="<%= result.entityId %>"
+                data-hierarchy-id="<%= result.hierarchyId %>"
+                title="Delete article override">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5-.5v8a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5v-8z"/>
+                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4H2.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h3.5V1h4v1H14.5a1 1 0 0 1 1 1v1zm-1-1V2H2v1h12V2z"/>
+                </svg>
+              </button>
+            <% } else { %>
+              <button class="badge-override-article ms-1"
+                data-full-article='<%- JSON.stringify(result) %>'
+                data-hierarchy-id="<%= result.hierarchyId %>"
+                title="Override article at this level">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+                  <path d="M9.293 0.293a1 1 0 0 1 1.414 0l5 5a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-.39.243l-5 2a.5.5 0 0 1-.65-.65l2-5a1 1 0 0 1 .243-.39l8-8zm1.414 1.414L10 2.414 13.586 6 14.707 4.879 10.707 0.879a1 1 0 0 1-1.414 0zm-1.707 2.707l-8 8V15h4.586l8-8H9.707zm-7.293 9.293v1h1l8-8H4.414l-7.293 7.293z"/>
+                  <rect x="4" y="13" width="8" height="1" fill="#007aff"/>
+                </svg>
+              </button>
+            <% } %>
+          <% } %>
+        </td>
+        <td>
+          <% 
+            const sortedPrices = (result.prices || []).slice().sort((a, b) => {
+              const clsA = Number(a.classificationSeq) || 0;
+              const clsB = Number(b.classificationSeq) || 0;
+              if (clsA !== clsB) return clsA - clsB;
+              const seqA = Number(a.priceSeq) || 0;
+              const seqB = Number(b.priceSeq) || 0;
+              return seqA - seqB;
+            });
+            sortedPrices.forEach(price => { 
+          %>
+            <div class="price-entry">
+              <span>💰 <span class="price-amount"><%= price.price %></span>
+              <small>
+                (Classif: <%= price.classificationSeq %>,
+                PriceSeq: <%= price.priceSeq %>, 
+                Eff: <span style="color:#0a58ca;font-weight:600"><%= price.effectivenessGroup %></span>
+                )
+              </small>
+            </div>
+          <% }) %>
+        </td>
+        <td style="vertical-align: top;">
+          <div style="display: flex; flex-direction: column; gap: 0.5em;">
+            <% sortedPrices.forEach(price => { %>
+              <button class="badge-edit-price"
+                style="align-self: flex-start; margin-top: 1px; margin-bottom: 1px;"
+                data-id="<%= price.id %>"
+                data-prezzo="<%= price.price %>"
+                data-hierarchy="<%= hierarchyId %>"
+                title="Edit price">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#007aff" viewBox="0 0 16 16">
+                  <path d="M12.146.854a.5.5 0 0 1 .708 0l2.292 2.292a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1-.11-.168l10-10zM11.207 2.5 3 10.707V13h2.293L13.5 4.793 11.207 2.5zm1.586-1.586a1.5.5 0 0 0-2.121 0l-10 10A1.5 1.5 0 0 0 0 13.5V16h2.5a1.5 1.5 0 0 0 1.061-.439l10-10a1.5 1.5 0 0 0 0-2.121l-2.292-2.292z"/>
+                </svg>
+              </button>
+            <% }) %>
+          </div>
+        </td>
+        <td>
+          <button 
+            type="button" 
+            class="btn btn-primary btn-sm btn-query-prezzi" 
+            data-entity-id="<%= result.entityId %>" 
+            data-code="<%= result.code %>" 
+            data-description="<%- result.description.replace(/"/g, '&quot;') %>" 
+            data-group="<%= result.groupDesc %>" 
+            data-prices='<%- JSON.stringify(result.prices || []) %>'>
+            Query
+          </button>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<!-- LARGE QUERY MODAL -->
+<div class="modal fade" id="queryModal" tabindex="-1" aria-labelledby="queryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width:80vw;">
+    <div class="modal-content" style="min-height:60vh;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="queryModalLabel">Query</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This is a Query window. You can customize the contents here.
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /LARGE QUERY MODAL -->
+
+<div class="modal fade" id="modalEditArticleClass" tabindex="-1" aria-labelledby="modalEditArticleClassLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="formEditArticleClass" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditArticleClassLabel">Edit ArticleClass Code</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editClassEntityId" name="entityId" />
+        <input type="hidden" id="editClassOldCode" name="oldCode" />
+        <label for="editClassNewCode" class="form-label">Select new ArticleClass Code</label>
+        <select class="form-select select2" id="editClassNewCode" name="newCode" required style="width:100%">
+          <option value="">Select...</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+<% } else if (results) { %>
+  <div class="alert alert-info text-center">
+    No articles found.
+  </div>
+<% } %>
+<script src="/js/articles.js"></script>
+<script src="/js/query-prices.js"></script>

@@ -1,0 +1,27 @@
+<h3 class="mb-4 text-center">
+  <span class="header-icon">🔎</span>
+  Article Search
+</h3>
+<form class="row g-2 mb-4 justify-content-center" method="get" action="/search">
+  <div class="col-md-3">
+    <input name="code" type="text" class="form-control" value="<%= code %>" placeholder="Article Code">
+  </div>
+  <div class="col-md-3">
+    <input name="description" type="text" class="form-control" value="<%= description %>" placeholder="Description">
+  </div>
+  <div class="col-md-3">
+    <input name="externalCode" type="text" class="form-control" value="<%= externalCode %>" placeholder="External Code">
+  </div>
+  <div class="col-md-3">
+    <select id="hierarchy-select" name="hierarchyId" class="form-select">
+      <% hierarchyLevels.forEach(function(level) { %>
+        <option value="<%= level.id %>" <%= level.id == hierarchyId ? 'selected' : '' %>>
+          <%= level.description %><% if (level.nave) { %> — <%= level.nave %><% } %>
+        </option>
+      <% }); %>
+    </select>
+  </div>
+  <div class="col-md-2 d-grid">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+</form>

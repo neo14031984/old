@@ -1,0 +1,270 @@
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  let prezzoModal = new bootstrap.Modal(document.getElementById('modalePrezzo'));
+  let descrizioneModal = new bootstrap.Modal(document.getElementById('modaleDescrizione'));
+  let groupModal = new bootstrap.Modal(document.getElementById('modaleGroup'));
+  let enableModal = new bootstrap.Modal(document.getElementById('modaleEnable'));
+
+  let prezzoId = null;
+  let groupListCache = null;
+
+  $(document).ready(function () {
+    $('#hierarchy-select').select2({
+      width: 'resolve',
+      dropdownAutoWidth: true,
+      placeholder: "Select a hierarchy",
+      allowClear: false,
+      language: {
+        inputTooShort: function () { return 'Type to search...'; },
+        searching: function () { return 'Searching...'; },
+        noResults: function () { return 'No results'; }
+      }
+    });
+
+    // MINIMAL PATCH: Select2 searchable initialization for ArticleClass
+    $('#selectClassCode').select2({
+      dropdownParent: $('#modaleClass'),
+      width: 'resolve',
+      dropdownAutoWidth: true,
+      placeholder: "Select new ArticleClass Code",
+      allowClear: false,
+      minimumResultsForSearch: 0,
+      language: {
+        inputTooShort: function () { return 'Type to search...'; },
+        searching: function () { return 'Searching...'; },
+        noResults: function () { return 'No results'; }
+      }
+    });
+
+    document.querySelectorAll('.badge-edit-price').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        prezzoId = btn.dataset.id;
+        const prezzoAttuale = btn.dataset.prezzo;
+        const hierarchyId = btn.dataset.hierarchy || "<%= hierarchyId %>";
+        document.getElementById('inputNuovoPrezzo').value = prezzoAttuale;
+        document.getElementById('inputPrezzoId').value = prezzoId;
+        document.getElementById('inputHierarchyId').value = hierarchyId;
+        prezzoModal.show();
+      });
+    });
+
+    document.getElementById('salvaPrezzo').addEventListener('click', function() {
+      const nuovoPrezzo = document.getElementById('inputNuovoPrezzo').value;
+      const priceId = document.getElementById('inputPrezzoId').value;
+      const hierarchyId = document.getElementById('inputHierarchyId').value || "<%= hierarchyId %>";
+      if(!nuovoPrezzo || !priceId) {
+        alert('Enter a valid price.');
+        return;
+      }
+      fetch('/update-price', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ priceId, newPrice: nuovoPrezzo, hierarchyId })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          prezzoModal.hide();
+          alert('Price updated!');
+          location.reload();
+        } else {
+          alert('Error: ' + (data.error || 'Unable to update price'));
+        }
+      }).catch(() => {
+        alert('Error in server request.');
+      });
+    });
+
+    document.querySelectorAll('.badge-edit-description').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const descrizioneAttuale = btn.dataset.description;
+        const entityId = btn.dataset.entityId;
+        const hierarchyId = btn.dataset.hierarchy || "<%= hierarchyId %>";
+        document.getElementById('inputNuovaDescrizione').value = descrizioneAttuale;
+        document.getElementById('inputEntityIdDescrizione').value = entityId;
+        document.getElementById('inputHierarchyIdDescrizione').value = hierarchyId;
+        descrizioneModal.show();
+      });
+    });
+
+    document.getElementById('salvaDescrizione').addEventListener('click', function() {
+      const nuovaDescrizione = document.getElementById('inputNuovaDescrizione').value;
+      const entityId = document.getElementById('inputEntityIdDescrizione').value;
+      const hierarchyId = document.getElementById('inputHierarchyIdDescrizione').value || "<%= hierarchyId %>";
+      if(!nuovaDescrizione || !entityId) {
+        alert('Enter a valid description.');
+        return;
+      }
+      fetch('/update-description', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entityId, nuovaDescrizione, hierarchyId })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          descrizioneModal.hide();
+          alert('Description updated!');
+          location.reload();
+        } else {
+          alert('Error: ' + (data.error || 'Unable to update description'));
+        }
+      }).catch(() => {
+        alert('Error in server request.');
+      });
+    });
+
+    document.querySelectorAll('.badge-edit-group').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const entityId = btn.dataset.entityId;
+        const groupId = btn.dataset.groupId;
+        const hierarchyId = btn.dataset.hierarchy || "<%= hierarchyId %>";
+        document.getElementById('inputEntityIdGroup').value = entityId;
+        document.getElementById('inputHierarchyIdGroup').value = hierarchyId;
+        const select = document.getElementById('selectGroupCode');
+        select.innerHTML = '<option>Loading...</option>';
+        if (groupListCache) {
+          populateGroupDropdown(groupListCache, groupId);
+        } else {
+          fetch('/all-groups')
+            .then(r => r.json())
+            .then(data => {
+              if (data.success && data.groups.length) {
+                groupListCache = data.groups;
+                populateGroupDropdown(groupListCache, groupId);
+              } else {
+                select.innerHTML = '<option>No groups available</option>';
+              }
+            });
+        }
+        groupModal.show();
+      });
+    });
+
+    function populateGroupDropdown(groups, selectedId) {
+      const select = document.getElementById('selectGroupCode');
+      select.innerHTML = '';
+      groups.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g.entityId;
+        opt.textContent = `${g.code} — ${g.description}`;
+        if (g.entityId === selectedId) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    document.getElementById('salvaGroup').addEventListener('click', function() {
+      const nuovoGroupId = document.getElementById('selectGroupCode').value;
+      const entityId = document.getElementById('inputEntityIdGroup').value;
+      const hierarchyId = document.getElementById('inputHierarchyIdGroup').value || "<%= hierarchyId %>";
+      if(!nuovoGroupId || !entityId) {
+        alert('Select a valid ArticleGroup.');
+        return;
+      }
+      fetch('/update-group', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entityId, nuovoGroupId, hierarchyId })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          groupModal.hide();
+          alert('ArticleGroup updated!');
+          location.reload();
+        } else {
+          alert('Error: ' + (data.error || 'Unable to update ArticleGroup'));
+        }
+      }).catch(() => {
+        alert('Error in server request.');
+      });
+    });
+
+    document.querySelectorAll('.badge-edit-enable').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const entityId = btn.dataset.entityId;
+        const enabled = btn.dataset.enabled === "true";
+        const hierarchyId = btn.dataset.hierarchy || "<%= hierarchyId %>";
+        document.getElementById('inputEntityIdEnable').value = entityId;
+        document.getElementById('inputHierarchyIdEnable').value = hierarchyId;
+        document.getElementById('selectEnable').value = enabled ? "true" : "false";
+        enableModal.show();
+      });
+    });
+
+    document.getElementById('salvaEnable').addEventListener('click', function() {
+      const entityId = document.getElementById('inputEntityIdEnable').value;
+      const hierarchyId = document.getElementById('inputHierarchyIdEnable').value || "<%= hierarchyId %>";
+      const newEnable = document.getElementById('selectEnable').value === "true";
+      if(!entityId) {
+        alert('Invalid article.');
+        return;
+      }
+      fetch('/update-enable', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ entityId, newEnable, hierarchyId })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          enableModal.hide();
+          alert('Enable/Disable status updated!');
+          location.reload();
+        } else {
+          alert('Error: ' + (data.error || 'Unable to update Enable/Disable status'));
+        }
+      }).catch(() => {
+        alert('Error in server request.');
+      });
+    });
+
+    document.querySelectorAll('.badge-delete-override').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const entityId = btn.dataset.entityId;
+        const hierarchyId = btn.dataset.hierarchyId;
+        deleteOverride(entityId, hierarchyId);
+      });
+    });
+
+    document.querySelectorAll('.badge-override-article').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const article = JSON.parse(btn.getAttribute('data-full-article'));
+        const hierarchyId = btn.dataset.hierarchyId;
+        doOverride(article, hierarchyId);
+      });
+    });
+  });
+
+  function deleteOverride(entityId, hierarchyId) {
+    if (!confirm('Do you really want to delete this override?')) return;
+    fetch('/delete-override', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entityId, hierarchyId })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      if (data.success) location.reload();
+      else alert('Override deletion error');
+    })
+    .catch(() => alert('Override deletion error'));
+  }
+  function doOverride(article, hierarchyId) {
+    if (!confirm('Do you really want to override this article at this level?')) return;
+    fetch('/override-article', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ article, targetHierarchyId: hierarchyId })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      if (data.success) location.reload();
+      else alert('Override error');
+    })
+    .catch(() => alert('Override error'));
+  }
+
+</script>

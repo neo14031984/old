@@ -1,0 +1,39 @@
+[2025-07-30 09:47:00] ERROR: Errore aggiornamento prezzo: Request failed with status code 400
+[2025-07-30 10:27:34] ERROR: [POST /update-price] Errore: Request failed with status code 400. Stack: AxiosError: Request failed with status code 400
+    at settle (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:2090:12)
+    at Unzip.handleStreamEnd (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:3207:11)
+    at Unzip.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+    at Axios.request (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:4317:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async C:\Users\acannavale\Desktop\PostmanAgo\app.js:196:5. Response data: {"messageType":"ERR","message":"hierarchyId ","responsePayload":null,"stackTrace":"\tat com.otalio.service.storage.ThreadBasedServletFilter.doFilter(ThreadBasedServletFilter.java:38)\n\tat com.otalio.security.PermissionsTokenFilter.doFilterInternal(PermissionsTokenFilter.java:57)\n\tat com.otalio.logging.ControllerLoggerHandler.doFilterInternal(ControllerLoggerHandler.java:86)\n\tat com.otalio.iamgateway.authentication.AuthenticatedUserFilter.doFilterInternal(AuthenticatedUserFilter.java:79)\n\tat com.otalio.logging.RequestIdLoggerHandler.doFilter(RequestIdLoggerHandler.java:43)","errorDoesNotExist":false}
+[2025-07-30 10:32:08] ERROR: [POST /update-price] Errore: Request failed with status code 400. Stack: AxiosError: Request failed with status code 400
+    at settle (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:2090:12)
+    at Unzip.handleStreamEnd (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:3207:11)
+    at Unzip.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+    at Axios.request (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:4317:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async C:\Users\acannavale\Desktop\PostmanAgo\app.js:200:5. Response data: {"messageType":"ERR","message":"hierarchyId ","responsePayload":null,"stackTrace":"\tat com.otalio.service.storage.ThreadBasedServletFilter.doFilter(ThreadBasedServletFilter.java:38)\n\tat com.otalio.security.PermissionsTokenFilter.doFilterInternal(PermissionsTokenFilter.java:57)\n\tat com.otalio.logging.ControllerLoggerHandler.doFilterInternal(ControllerLoggerHandler.java:86)\n\tat com.otalio.iamgateway.authentication.AuthenticatedUserFilter.doFilterInternal(AuthenticatedUserFilter.java:79)\n\tat com.otalio.logging.RequestIdLoggerHandler.doFilter(RequestIdLoggerHandler.java:43)","errorDoesNotExist":false}
+[2025-07-30 10:53:12] ERROR: [POST /update-price] Errore: Request failed with status code 400. Stack: AxiosError: Request failed with status code 400
+    at settle (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:2090:12)
+    at Unzip.handleStreamEnd (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:3207:11)
+    at Unzip.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+    at Axios.request (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:4317:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async C:\Users\acannavale\Desktop\PostmanAgo\app.js:147:5. Response data: {"messageType":"ERR","message":"hierarchyId ","responsePayload":null,"stackTrace":"\tat com.otalio.service.storage.ThreadBasedServletFilter.doFilter(ThreadBasedServletFilter.java:38)\n\tat com.otalio.security.PermissionsTokenFilter.doFilterInternal(PermissionsTokenFilter.java:57)\n\tat com.otalio.logging.ControllerLoggerHandler.doFilterInternal(ControllerLoggerHandler.java:86)\n\tat com.otalio.iamgateway.authentication.AuthenticatedUserFilter.doFilterInternal(AuthenticatedUserFilter.java:79)\n\tat com.otalio.logging.RequestIdLoggerHandler.doFilter(RequestIdLoggerHandler.java:43)","errorDoesNotExist":false}
+[2025-07-30 11:00:56] ERROR: [POST /update-price] PUT body che stai mandando: {"who":"7b44db2655ba11ebb7346f69bc3085b7","when":"2021-05-03T19:01:28","creationDTTMLocal":"2021-03-30T08:54:04","updatedDTTMLocal":"2021-05-03T17:01:28","id":"7a976ba8913511eba3a72f3e7f05351a","entityId":"7a971d87913511eba3a70a580a820929","hierarchyId":"1","where":"MSC Cruises - Enterprise","how":"Undefined","inherited":false,"deleted":false,"articleClassificationEntityId":"bff11758913311eba3a70a580a820929","priceSeq":1,"price":9,"cost":null,"commission":null,"effectivenessGroup":"c5ce192a5f2c11ebb4c00a580a800339","articleEntityId":"7cbb20a590c411eba3a70a580a820929","classificationSeq":1,"customLevels":{"level1":true,"level2":false,"level3":false,"level4":false,"level5":false,"level6":false,"level7":false,"level8":false,"level9":false,"level10":false,"level11":false,"level12":false,"level13":false,"level14":false,"level15":false,"level16":false},"subLevels":{"level1":true,"level2":false,"level3":false,"level4":false,"level5":false,"level6":false,"level7":false,"level8":false,"level9":false,"level10":false,"level11":false,"level12":false,"level13":false,"level14":false,"level15":false,"level16":false},"mainLevels":{"level1":true,"level2":false,"level3":false,"level4":false,"level5":false,"level6":false,"level7":false,"level8":false,"level9":false,"level10":false,"level11":false,"level12":false,"level13":false,"level14":false,"level15":false,"level16":false},"priceLevelSwitchName":""}
+[2025-07-30 11:00:56] ERROR: [POST /update-price] hierarchyId type: string, value: "1"
+[2025-07-30 11:00:56] ERROR: [POST /update-price] Errore: Request failed with status code 400. Stack: AxiosError: Request failed with status code 400
+    at settle (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:2090:12)
+    at Unzip.handleStreamEnd (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:3207:11)
+    at Unzip.emit (node:events:531:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+    at Axios.request (C:\Users\acannavale\Desktop\PostmanAgo\node_modules\axios\dist\node\axios.cjs:4317:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async C:\Users\acannavale\Desktop\PostmanAgo\app.js:151:5. Response data: {"messageType":"ERR","message":"hierarchyId ","responsePayload":null,"stackTrace":"\tat com.otalio.service.storage.ThreadBasedServletFilter.doFilter(ThreadBasedServletFilter.java:38)\n\tat com.otalio.security.PermissionsTokenFilter.doFilterInternal(PermissionsTokenFilter.java:57)\n\tat com.otalio.logging.ControllerLoggerHandler.doFilterInternal(ControllerLoggerHandler.java:86)\n\tat com.otalio.iamgateway.authentication.AuthenticatedUserFilter.doFilterInternal(AuthenticatedUserFilter.java:79)\n\tat com.otalio.logging.RequestIdLoggerHandler.doFilter(RequestIdLoggerHandler.java:43)","errorDoesNotExist":false}

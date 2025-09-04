@@ -1,0 +1,104 @@
+<div class="modal fade" id="modalePrezzo" tabindex="-1" aria-labelledby="modalePrezzoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalePrezzoLabel">Edit Price</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="inputNuovoPrezzo" class="form-label">New price:</label>
+        <input type="number" class="form-control" id="inputNuovoPrezzo" min="0" step="0.01">
+        <input type="hidden" id="inputPrezzoId">
+        <input type="hidden" id="inputHierarchyId">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="salvaPrezzo">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modaleDescrizione" tabindex="-1" aria-labelledby="modaleDescrizioneLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaleDescrizioneLabel">Edit Description</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="inputNuovaDescrizione" class="form-label">New description:</label>
+        <input type="text" class="form-control" id="inputNuovaDescrizione">
+        <input type="hidden" id="inputEntityIdDescrizione">
+        <input type="hidden" id="inputHierarchyIdDescrizione">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="salvaDescrizione">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modaleGroup" tabindex="-1" aria-labelledby="modaleGroupLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaleGroupLabel">Change ArticleGroup</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="selectGroupCode" class="form-label">Select new ArticleGroup:</label>
+        <select class="form-select" id="selectGroupCode" style="width:100%"></select>
+        <input type="hidden" id="inputEntityIdGroup">
+        <input type="hidden" id="inputHierarchyIdGroup">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="salvaGroup">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modaleEnable" tabindex="-1" aria-labelledby="modaleEnableLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaleEnableLabel">Change Enable/Disable Status</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="selectEnable" class="form-label">Select status:</label>
+        <select class="form-select" id="selectEnable">
+          <option value="true">✓ Enabled</option>
+          <option value="false">✗ Disabled</option>
+        </select>
+        <input type="hidden" id="inputEntityIdEnable">
+        <input type="hidden" id="inputHierarchyIdEnable">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="salvaEnable">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PATCH: ArticleClass only select, no input above -->
+<div class="modal fade" id="modaleClass" tabindex="-1" aria-labelledby="modaleClassLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modaleClassLabel">Edit ArticleClass Code</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Removed ArticleClass search row as requested -->
+        <label for="selectClassCode" class="form-label">Select new ArticleClass Code:</label>
+        <select class="form-select" id="selectClassCode" style="width:100%"></select>
+        <input type="hidden" id="inputEntityIdClass">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="salvaClass">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
